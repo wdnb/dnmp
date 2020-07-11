@@ -25,54 +25,30 @@ services:
     networks:
       - default
 
-  php:
+  php73:
     build:
       context: ./services/php
       args:
-        PHP_VERSION: php:${PHP_VERSION}-fpm-alpine
+        PHP_VERSION: php:${PHP73_VERSION}-fpm-alpine
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-        PHP_EXTENSIONS: ${PHP_EXTENSIONS}
+        PHP_EXTENSIONS: ${PHP73_EXTENSIONS}
         TZ: "$TZ"
-    container_name: php
+    container_name: php73
     expose:
       - 9501
     extra_hosts:
       - "www.site1.com:172.17.0.1"
     volumes:
       - ${SOURCE_DIR}:/www/:rw
-      - ${PHP_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
-      - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
-      - ${PHP_LOG_DIR}:/var/log/php
+      - ${PHP73_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP73_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP73_LOG_DIR}:/var/log/php
       - ${DATA_DIR}/composer:/tmp/composer
     restart: always
     cap_add:
       - SYS_PTRACE
     networks:
       - default
-#  php73:
-#    build:
-#      context: ./services/php
-#      args:
-#        PHP_VERSION: php:${PHP73_VERSION}-fpm-alpine
-#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-#        PHP_EXTENSIONS: ${PHP73_EXTENSIONS}
-#        TZ: "$TZ"
-#    container_name: php73
-#    expose:
-#      - 9501
-#    extra_hosts:
-#      - "www.site1.com:172.17.0.1"
-#    volumes:
-#      - ${SOURCE_DIR}:/www/:rw
-#      - ${PHP73_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
-#      - ${PHP73_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
-#      - ${PHP73_LOG_DIR}:/var/log/php
-#      - ${DATA_DIR}/composer:/tmp/composer
-#    restart: always
-#    cap_add:
-#      - SYS_PTRACE
-#    networks:
-#      - default
 
 #  php56:
 #    build:
@@ -118,35 +94,20 @@ services:
 #    networks:
 #      - default
 
-  mysql:
-    image: mysql:${MYSQL_VERSION}
-    container_name: mysql
+  mysql5:
+    image: mysql:${MYSQL5_VERSION}
+    container_name: mysql5
     ports:
-      - "${MYSQL_HOST_PORT}:3306"
+      - "${MYSQL5_HOST_PORT}:3306"
     volumes:
-      - ${MYSQL_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
-      - ${DATA_DIR}/mysql:/var/lib/mysql/:rw
+      - ${MYSQL5_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
+      - ${DATA_DIR}/mysql5:/var/lib/mysql/:rw
     restart: always
     networks:
       - default
     environment:
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: "${MYSQL5_ROOT_PASSWORD}"
       TZ: "$TZ"
-
-#  mysql5:
-#    image: mysql:${MYSQL5_VERSION}
-#    container_name: mysql5
-#    ports:
-#      - "${MYSQL5_HOST_PORT}:3306"
-#    volumes:
-#      - ${MYSQL5_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
-#      - ${DATA_DIR}/mysql5:/var/lib/mysql/:rw
-#    restart: always
-#    networks:
-#      - default
-#    environment:
-#      MYSQL_ROOT_PASSWORD: "${MYSQL5_ROOT_PASSWORD}"
-#      TZ: "$TZ"
 
 #  openresty:
 #    image:  openresty/openresty:${OPENRESTY_VERSION}

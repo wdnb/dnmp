@@ -1,4 +1,12 @@
 version: "3"
+
+networks:
+  default:
+
+volumes:
+  postgres:
+    driver: ${VOLUMES_DRIVER}
+
 services:
   nginx:
     build:
@@ -7,7 +15,7 @@ services:
         NGINX_VERSION: nginx:${NGINX_VERSION}
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
         NGINX_INSTALL_APPS: ${NGINX_INSTALL_APPS}
-    container_name: nginx
+    #container_name: nginx
     ports:
       - "${NGINX_HTTP_HOST_PORT}:80"
       - "${NGINX_HTTPS_HOST_PORT}:443"
@@ -33,7 +41,7 @@ services:
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
         PHP_EXTENSIONS: ${PHP_EXTENSIONS}
         TZ: "$TZ"
-    container_name: php
+    #container_name: php
     expose:
       - 9501
     extra_hosts:
@@ -57,7 +65,7 @@ services:
 #        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
 #        PHP_EXTENSIONS: ${PHP73_EXTENSIONS}
 #        TZ: "$TZ"
-#    container_name: php73
+#    #container_name: php73
 #    expose:
 #      - 9501
 #    extra_hosts:
@@ -82,7 +90,7 @@ services:
 #        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
 #        PHP_EXTENSIONS: ${PHP56_EXTENSIONS}
 #        TZ: "$TZ"
-#    container_name: php56
+#    #container_name: php56
 #    expose:
 #      - 9501
 #    volumes:
@@ -105,7 +113,7 @@ services:
 #        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
 #        PHP_EXTENSIONS: ${PHP54_EXTENSIONS}
 #        TZ: "$TZ"
-#    container_name: php54
+#    #container_name: php54
 #    volumes:
 #      - ${SOURCE_DIR}:/www/:rw
 #      - ${PHP54_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
@@ -120,7 +128,7 @@ services:
 
   mysql:
     image: mysql:${MYSQL_VERSION}
-    container_name: mysql
+    #container_name: mysql
     ports:
       - "${MYSQL_HOST_PORT}:3306"
     volumes:
@@ -135,7 +143,7 @@ services:
 
 #  mysql5:
 #    image: mysql:${MYSQL5_VERSION}
-#    container_name: mysql5
+#    #container_name: mysql5
 #    ports:
 #      - "${MYSQL5_HOST_PORT}:3306"
 #    volumes:
@@ -150,7 +158,7 @@ services:
 
 #  openresty:
 #    image:  openresty/openresty:${OPENRESTY_VERSION}
-#    container_name: openresty
+#    #container_name: openresty
 #    ports:
 #       - "${OPENRESTY_HTTP_HOST_PORT}:80"
 #       - "${OPENRESTY_HTTPS_HOST_PORT}:443"
@@ -169,7 +177,7 @@ services:
 
 #  redis:
 #    image: redis:${REDIS_VERSION}
-#    container_name: redis
+#    #container_name: redis
 #    ports:
 #      - "${REDIS_HOST_PORT}:6379"
 #    volumes:
@@ -184,7 +192,7 @@ services:
 
 #  memcached:
 #    image: memcached:${MEMCACHED_VERSION}
-#    container_name: memcached
+#    #container_name: memcached
 #    ports:
 #      - "${MEMCACHED_HOST_PORT}:11211"
 #    environment:
@@ -194,7 +202,7 @@ services:
 
 #  rabbitmq:
 #    image: rabbitmq:${RABBITMQ_VERSION}
-#    container_name: rabbitmq
+#    #container_name: rabbitmq
 #    restart: always
 #    ports:
 #      - "${RABBITMQ_HOST_PORT_C}:5672"
@@ -208,7 +216,7 @@ services:
 
 #  phpmyadmin:
 #    image: phpmyadmin/phpmyadmin:latest
-#    container_name: phpmyadmin
+#    #container_name: phpmyadmin
 #    ports:
 #      - "${PHPMYADMIN_HOST_PORT}:80"
 #    volumes:
@@ -223,7 +231,7 @@ services:
 
 #  phpredisadmin:
 #    image: erikdubbelboer/phpredisadmin:latest
-#    container_name: phpredisadmin
+#    #container_name: phpredisadmin
 #    ports:
 #      - "${REDISMYADMIN_HOST_PORT}:80"
 #    networks:
@@ -235,7 +243,7 @@ services:
 
 #  mongodb:
 #    image: mongo:${MONGODB_VERSION}
-#    container_name: mongodb
+#    #container_name: mongodb
 #    environment:
 #        MONGO_INITDB_ROOT_USERNAME: "${MONGODB_INITDB_ROOT_USERNAME}"
 #        MONGO_INITDB_ROOT_PASSWORD: "${MONGODB_INITDB_ROOT_PASSWORD}"
@@ -252,7 +260,7 @@ services:
 
 #  adminmongo:
 #    image: mrvautin/adminmongo
-#    container_name: adminmongo
+#    #container_name: adminmongo
 #    ports:
 #      - "${ADMINMONGO_HOST_PORT}:1234"
 #    environment:
@@ -268,7 +276,7 @@ services:
 #      args:
 #        ELASTICSEARCH_VERSION: ${ELASTICSEARCH_VERSION}
 #        ELASTICSEARCH_PLUGINS: ${ELASTICSEARCH_PLUGINS}
-#    container_name: elasticsearch
+#    #container_name: elasticsearch
 #    environment:
 #      - TZ=$TZ
 #      - discovery.type=single-node
@@ -284,7 +292,7 @@ services:
 
 #  kibana:
 #    image: kibana:${KIBANA_VERSION}
-#    container_name: kibana
+#    #container_name: kibana
 #    environment:
 #      TZ: "$TZ"
 #      elasticsearch.hosts: http://elasticsearch:9200
@@ -298,7 +306,7 @@ services:
 
 #  logstash:
 #    image: logstash:${LOGSTASH_VERSION}
-#    container_name: logstash
+#    #container_name: logstash
 #    hostname: logstash
 #    restart: always
 #    depends_on:
@@ -315,7 +323,7 @@ services:
 #      args:
 #        ALPINE_VERSION: alpine:${ALPINE_VERSION}
 #        TZ: "$TZ"
-#    container_name: supervisor
+#    #container_name: supervisor
 #    ports:
 #      - "${SUPERVISOR_HOST_PORT_C}:9001"
 #    volumes:
@@ -333,5 +341,96 @@ services:
 #    networks:
 #      - default
 
-networks:
-  default:
+### PostgreSQL ###########################################
+#  postgres:
+#    build:
+#      context: ./services/postgres
+#      args:
+#        - POSTGRES_VERSION=${POSTGRES_VERSION}
+#    volumes:
+#      - ${DATA_DIR}/postgres:/var/lib/postgresql/data
+#      - ${POSTGRES_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
+#    ports:
+#      - "${POSTGRES_PORT}:5432"
+#    environment:
+#      - POSTGRES_DB=${POSTGRES_DB}
+#      - POSTGRES_USER=${POSTGRES_USER}
+#      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+#      - GITLAB_POSTGRES_INIT=${GITLAB_POSTGRES_INIT}
+#      - GITLAB_POSTGRES_USER=${GITLAB_POSTGRES_USER}
+#      - GITLAB_POSTGRES_PASSWORD=${GITLAB_POSTGRES_PASSWORD}
+#      - GITLAB_POSTGRES_DB=${GITLAB_POSTGRES_DB}
+#      - JUPYTERHUB_POSTGRES_INIT=${JUPYTERHUB_POSTGRES_INIT}
+#      - JUPYTERHUB_POSTGRES_USER=${JUPYTERHUB_POSTGRES_USER}
+#      - JUPYTERHUB_POSTGRES_PASSWORD=${JUPYTERHUB_POSTGRES_PASSWORD}
+#      - JUPYTERHUB_POSTGRES_DB=${JUPYTERHUB_POSTGRES_DB}
+#      - SONARQUBE_POSTGRES_INIT=${SONARQUBE_POSTGRES_INIT}
+#      - SONARQUBE_POSTGRES_DB=${SONARQUBE_POSTGRES_DB}
+#      - SONARQUBE_POSTGRES_USER=${SONARQUBE_POSTGRES_USER}
+#      - SONARQUBE_POSTGRES_PASSWORD=${SONARQUBE_POSTGRES_PASSWORD}
+#      - POSTGRES_CONFLUENCE_INIT=${CONFLUENCE_POSTGRES_INIT}
+#      - POSTGRES_CONFLUENCE_DB=${CONFLUENCE_POSTGRES_DB}
+#      - POSTGRES_CONFLUENCE_USER=${CONFLUENCE_POSTGRES_USER}
+#      - POSTGRES_CONFLUENCE_PASSWORD=${CONFLUENCE_POSTGRES_PASSWORD}
+#    networks:
+#      - default
+#
+#### Gitlab ################################################
+#  gitlab:
+#    build:
+#      context: ./services/gitlab
+#    environment:
+#      GITLAB_OMNIBUS_CONFIG: |
+#        external_url '${GITLAB_DOMAIN_NAME}'
+#        redis['enable'] = false
+#        nginx['listen_https'] = false
+#        nginx['listen_port'] = 80
+#        nginx['custom_gitlab_server_config'] = "set_real_ip_from 172.0.0.0/8;\nreal_ip_header X-Real-IP;\nreal_ip_recursive on;"
+#        postgresql['enable'] = false
+#        gitlab_rails['trusted_proxies'] = ['caddy','nginx','apache2']
+#        gitlab_rails['redis_host'] = 'redis'
+#        gitlab_rails['redis_database'] = 8
+#        gitlab_rails['db_host'] = '${GITLAB_POSTGRES_HOST}'
+#        gitlab_rails['db_username'] = '${GITLAB_POSTGRES_USER}'
+#        gitlab_rails['db_password'] = '${GITLAB_POSTGRES_PASSWORD}'
+#        gitlab_rails['db_database'] = '${GITLAB_POSTGRES_DB}'
+#        gitlab_rails['initial_root_password'] = '${GITLAB_ROOT_PASSWORD}'
+#        gitlab_rails['gitlab_shell_ssh_port'] = ${GITLAB_HOST_SSH_PORT}
+#    volumes:
+#      - ${DATA_DIR}/gitlab/config:/etc/gitlab
+#      - ${DATA_DIR}/gitlab/data:/var/opt/gitlab
+#      - ${GITLAB_HOST_LOG_PATH}:/var/log/gitlab
+#    ports:
+#      - "${GITLAB_HOST_HTTP_PORT}:80"
+#      - "${GITLAB_HOST_HTTPS_PORT}:443"
+#      - "${GITLAB_HOST_SSH_PORT}:22"
+#    networks:
+#      - default
+#    depends_on:
+#      - redis
+#      - postgres
+#  gitlab-runner:
+#    image: gitlab/gitlab-runner:latest
+#    environment:
+#      - CI_SERVER_URL=${GITLAB_CI_SERVER_URL}
+#      - REGISTRATION_TOKEN=${GITLAB_RUNNER_REGISTRATION_TOKEN}
+#      - RUNNER_NAME=${COMPOSE_PROJECT_NAME}-runner
+#      - REGISTER_NON_INTERACTIVE=${GITLAB_REGISTER_NON_INTERACTIVE}
+#      - RUNNER_EXECUTOR=shell
+#    volumes:
+#      - ${DATA_DIR}/gitlab/runner:/etc/gitlab-runner
+#      - /var/run/docker.sock:/var/run/docker.sock:rw
+#
+### Portainer ################################################
+  portainer:
+    build:
+      context: ./services/portainer
+    volumes:
+      - ${DATA_DIR}/portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    extra_hosts:
+      - "dockerhost:${DOCKER_HOST_IP}"
+    ports:
+      - 9010:9000
+    networks:
+      - default

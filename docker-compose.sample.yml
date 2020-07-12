@@ -423,6 +423,7 @@ services:
 #
 ### Portainer ################################################
   portainer:
+    image: portainer/portainer:latest
     build:
       context: ./services/portainer
     volumes:

@@ -154,7 +154,6 @@ services:
 ### arm ################################################
 #  mysql5:
 #    image: biarms/mysql:5.7
-#    #container_name: mysql5
 #    ports:
 #      - "3306"
 #    volumes:

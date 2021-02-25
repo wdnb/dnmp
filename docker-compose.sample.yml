@@ -382,6 +382,7 @@ services:
 #### Gitlab ################################################
   gitlab:
     image: gitlab/gitlab-ee:latest
+   #image: ulm0/gitlab
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url '${GITLAB_DOMAIN_NAME}'
@@ -416,6 +417,7 @@ services:
 
   gitlab-runner:
     image: gitlab/gitlab-runner:latest
+   #image: klud/gitlab-runner
     environment:
       - CI_SERVER_URL=${GITLAB_CI_SERVER_URL}
       - REGISTRATION_TOKEN=${GITLAB_RUNNER_REGISTRATION_TOKEN}

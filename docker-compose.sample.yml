@@ -449,6 +449,7 @@ services:
 ### Portainer ################################################
   portainer:
     image: portainer/portainer:latest
+    container_name: portainer
     volumes:
       - ${DATA_DIR}/portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock

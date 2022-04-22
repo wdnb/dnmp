@@ -129,14 +129,14 @@ services:
       - ${MYSQL_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
       - ${DATA_DIR}/mysql:/var/lib/mysql/:rw
       - ${MYSQL_LOG_DIR}:/var/log/mysql/:rw
-
     #restart: always
     networks:
       - default
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_ROOT_HOST: "${MYSQL_ROOT_HOST}"
       TZ: "$TZ"
-      
+    
 #  mysql5:
 #    image: mysql:${MYSQL5_VERSION}
 #    #container_name: mysql5
